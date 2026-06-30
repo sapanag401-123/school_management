@@ -5,26 +5,29 @@ import {
     getById,
     remove,
     update,
-} from "../controllers/student.controller.js";
+} from "../controllers/category.controller.js";
 
 const router = express.Router();
-// STUDENT CRUD
 
-// Get All Students
+
+
+
+
+// category CRUD
+
+// Get All category
 router.get("/", getAll);
     
-
-// Get Student By ID
+// Get category By ID
 router.get("/:id", getById);
    
-// Create Student
-router.post("students", create);
+// Create category
+router.post("category", create);
     
-// Update Student
+// Update category
 router.put("/:id", update);
     
-
-// Delete Student
+// Delete category
 router.delete("/:id", remove);
     
 

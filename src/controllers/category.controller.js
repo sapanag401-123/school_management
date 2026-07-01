@@ -54,7 +54,7 @@ export const create = (req, res) => {
 
     res.status(201).json({
         message: "category created",
-        success: true
+        success: true,
         data: category[category.length - 1],
     });
 };

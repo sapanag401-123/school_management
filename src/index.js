@@ -1,8 +1,8 @@
 import http from "http";
 import express from "express";
-import studentRoutes from "./routes/student.js";
-import teacherRoutes from "./routes/teacher.js";
-import categoryRoutes from "./routes/category.js";
+import studentRoutes from "./routes/student.routes.js";
+import teacherRoutes from "./routes/teacher.routes.js";
+import categoryRoutes from "./routes/category.routes.js";
 
 
 

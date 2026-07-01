@@ -53,7 +53,7 @@ export const create = (req, res) => {
 
     res.status(201).json({
         message: "Student created",
-        success: true
+        success: true,
         data: teachers[teachers.length - 1],
     });
 };

@@ -8,10 +8,14 @@ import {
 } from "../controllers/student.controller.js";
 
 const router = express.Router();
+const mid = (req,res, next)=>{
+   console.log("get all students mid");
+   next();
+}
 // STUDENT CRUD
 
 // Get All Students
-router.get("/", getAll);
+router.get("/",mid, mid, getAll);
     
 
 // Get Student By ID
@@ -21,11 +25,11 @@ router.get("/:id", getById);
 router.post("students", create);
     
 // Update Student
-router.put("/:id", update);
+router.put("/:id",mid, mid, update);
     
 
 // Delete Student
-router.delete("/:id", remove);
+router.delete("/:id",mid, mid,remove);
     
 
 export default router;

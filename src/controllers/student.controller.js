@@ -7,8 +7,8 @@ const students = [];
 
 // Get All Students
 export const getAll = (req, res) => {
-    const query = req.query;
-    console.log(query);
+    // const query = req.query;
+    // console.log(query);
 
     res.status(200).json({
         message: "All students fetched",
@@ -18,23 +18,26 @@ export const getAll = (req, res) => {
 };
 
 // Get Student By ID
-export const getById = (req, res) => {
+export const getById = (req, res, next) => {
+    console.log("get all student");
+    console.log(req.teacher);
    // const id = req.params.id;
-   const { id } = req.params;
+   const id = req.params;
 
    const student = students.find((student) => student._id === Number(id));
 
+  console.log(student);
+
    if (!student) {
-    res.status(404).json({
+    next({
         message: "student not found",
-        success: false,
-        data: null,
+        statusCode: 404,
     });
     return;
    }
 
     res.status(200).json({
-        message: `Student with ID ${id} fetched`,
+        message: `student with ID ${id} fetched`,
         success: true,
         data: student,
     });

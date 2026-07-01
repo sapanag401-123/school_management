@@ -18,17 +18,19 @@ export const getAll = (req, res) => {
 };
 
 // Get teacher By ID
-export const getById = (req, res) => {
+export const getById = (req, res, next) => {
+    console.log("get all teacher");
+    console.log(req.student);
    // const id = req.params.id;
    const { id } = req.params;
 
    const teacher = teachers.find((teacher) => teacher._id === Number(id));
+   console.log(teacher);
 
    if (!teacher) {
-    res.status(404).json({
+    next({
         message: "teacher not found",
-        success: false,
-        data: null,
+        statusCode: 404,
     });
     return;
    }
@@ -41,7 +43,7 @@ export const getById = (req, res) => {
 };
 
 // Create teacher
-export const create = (req, res) => {
+export const create = (req, res, next) => {
     const { name, subject } = req.body;
 
     teachers.push({
@@ -65,25 +67,19 @@ export const update = (req, res) => {
     const { name, subject } = req.body;
 
     const index = teachers.findIndex((teacher) => teachers._id === Number());
-    if (index === -1){
-        res.status(404).json({
-            message: "teacher not found",
-            success: false,
-            data: null,
-        });
-        return;
-    }
-
-    students[index] = {
-        name,
-        subject,
-    };
-
+    
+    if (!teacher) {
+    next({
+        message: "teacher updated",
+        statusCode: 404,
+    });
+    return;
+   }
 
     res.status(200).json({
-        message: "teacher updated",
+        message: `teacher with ID ${id} fetched`,
         success: true,
-        data: teachers[index],
+        data: teacher,
     });
 };
 
@@ -93,20 +89,24 @@ export const remove = (req, res) => {
 
     const index = teachers.findIndex((teacher) => teachers._id === Number());
 
-    if (index === -1){
-        res.status(404).json({
-            message: "teacher not found",
-            success: false,
-            data: null,
-        });
-        return;
-    }
-
-    teachers.splice(index, 1);
-    res.status(200).json({
+    if (!teacher) {
+    next({
         message: "teacher deleted",
+        statusCode: 404,
+    });
+    return;
+   }
+
+    res.status(200).json({
+        message: `teacher with ID ${id} fetched`,
         success: true,
-        data: null,
+        data: teacher,
     });
 };
 
+    // teachers.splice(index, 1);
+    // res.status(200).json({
+    //     message: "teacher deleted",
+    //     success: true,
+    //     data: null,
+    
